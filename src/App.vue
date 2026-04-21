@@ -1,17 +1,17 @@
 <template>
-<div class="app">
-<header>
+<div class="container mt-4">
+<header class="text-center mb-4 p-4 bg-primary text-white rounded">
 <h1>Менеджер книг</h1>
-<p>Управляй своей библиотекой</p>
+<p class="lead">Управляй своей библиотекой</p>
 </header>
 <main>
 <AddBookForm @add-book="addBook"/>
 <BookFilters v-model:searchQuery="searchQuery" v-model:filter="currentFilter" :books="books"/>
-<div v-if="filteredBooks.length===0" class="empty-state">
-<p>Книги не найдены :(</p>
-<p>Добавьте первую книгу или измените параметры поиска</p>
+<div v-if="filteredBooks.length===0" class="alert alert-info text-center">
+<p class="mb-0">Книги не найдены</p>
+<p class="small">Добавьте первую книгу или измените параметры поиска</p>
 </div>
-<div v-else class="books-list">
+<div v-else class="row">
 <BookCard v-for="book in filteredBooks" :key="book.id" :book="book" @toggle="toggleBook(book.id)" @delete="deleteBook(book.id)" @rate="rateBook(book.id,$event)"/>
 </div>
 </main>
@@ -56,21 +56,5 @@ return book.title.toLowerCase().includes(query)||book.author.toLowerCase().inclu
 })
 </script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f0f2f5;line-height:1.6;}
-.app{max-width:800px;margin:0 auto;padding:20px;}
-header{
-text-align:center;
-margin-bottom:30px;
-padding:20px;
-background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
-color:white;
-border-radius:10px;
-box-shadow:0 4px 6px rgba(0,0,0,0.1);
-}
-header h1{font-size:2.5em;margin-bottom:5px;}
-main{background:white;padding:30px;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,0.1);}
-.empty-state{text-align:center;padding:40px;color:#999;font-size:1.2em;}
-.empty-state p:first-child{font-size:3em;margin-bottom:20px;}
-.books-list{margin-top:20px;}
+body{background:#f8f9fa;}
 </style>
